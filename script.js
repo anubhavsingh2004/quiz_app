@@ -34,6 +34,9 @@ const questions = [
 let currentQuestion = 0;
 let score = 0;
 let selectedOption = null;
+let timer;
+let timeLeft = 15;
+
 
 function loadQuestion() {
   if (!document.getElementById("question")) return;
@@ -75,6 +78,25 @@ function loadQuestion() {
     btn.onclick = () => selectOption(btn, option);
     optionsDiv.appendChild(btn);
   });
+  startTimer();
+
+function startTimer() {
+  timeLeft = 15;
+  document.getElementById("time").textContent = timeLeft;
+
+  clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time").textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      alert("⏰ Time's up!");
+      nextQuestion();
+    }
+  }, 1000);
+}
+
 }
 
 
@@ -90,6 +112,8 @@ function selectOption(button, optionText) {
 }
 
 function nextQuestion() {
+    clearInterval(timer);
+
   if (!selectedOption) {
     alert("Please select an answer!");
     return;
