@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Result</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Quiz Completed!</h1>
+    <p id="score">Loading score...</p>
+    <button onclick="window.location.href='index.html'">Retake Quiz</button>
+  </div>
+
+  <script>
+    const score = localStorage.getItem("quizScore") || 0;
+    document.getElementById("score").textContent = `You scored ${score}/5`;
+  </script>
+</body>
+</html>
