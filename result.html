@@ -8,12 +8,26 @@
   <div class="container">
     <h1>🎉 Quiz Completed!</h1>
     <p id="score">Loading score...</p>
+    <p id="message"></p>
     <button onclick="window.location.href='index.html'">Retake Quiz</button>
   </div>
 
   <script>
     const score = localStorage.getItem("quizScore") || 0;
     document.getElementById("score").textContent = `You scored ${score}/5`;
+
+    let message = "";
+    if (score == 5) {
+      message = "🔥 Outstanding! You're a quiz master!";
+    } else if (score >= 3) {
+      message = "👏 Good job! You have a solid grasp!";
+    } else if (score == 2) {
+      message = "🙂 Not bad! Little more practice will help.";
+    } else {
+      message = "😅 Don’t worry! Try again and you’ll get better.";
+    }
+
+    document.getElementById("message").textContent = message;
   </script>
 </body>
 </html>

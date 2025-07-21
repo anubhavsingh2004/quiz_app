@@ -51,7 +51,32 @@ function loadQuestion() {
     btn.onclick = () => selectOption(btn, option);
     optionsDiv.appendChild(btn);
   });
+}function loadQuestion() {
+  if (!document.getElementById("question")) return;
+
+  const q = questions[currentQuestion];
+  document.getElementById("question").textContent = `Q${currentQuestion + 1}: ${q.question}`;
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+  selectedOption = null;
+
+  // Shuffle the options
+  const shuffledOptions = [...q.options];
+  for (let i = shuffledOptions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+  }
+
+  // Render shuffled options
+  shuffledOptions.forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    btn.onclick = () => selectOption(btn, option);
+    optionsDiv.appendChild(btn);
+  });
 }
+
 
 function selectOption(button, optionText) {
   const allButtons = document.querySelectorAll("#options button");
